@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:memoapp/common/models/categoria.dart';
 
-class Tarefas {
+class TarefasModel {
   final int id;
   final String descricao;
-  final Categoria categoria;
-  final DateTime dataInicar;
-  final bool terminado;
-  final DateTime dataTerminado;
+  final String categoria;
+  final String dataInicar;
+  final int terminado;
+  final String dataTerminado;
 
-  const Tarefas({
+  TarefasModel({
     required this.id,
     required this.descricao,
     required this.categoria,
@@ -17,4 +17,14 @@ class Tarefas {
     required this.terminado,
     required this.dataTerminado,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'descricao': descricao,
+      'categoria': categoria,
+      'dataInicar': dataInicar,
+      'terminado': terminado,
+      'dataTerminado': dataTerminado
+    };
+  }
 }
