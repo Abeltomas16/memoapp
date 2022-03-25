@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/common/widgets/error_widget.dart';
 import 'package:memoapp/common/widgets/loading_widget.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/home_page.dart';
 
 class ContainerHome extends StatelessWidget {
-  const ContainerHome({Key? key}) : super(key: key);
-  Future<List<Map<String, String>>> retornaOpces() async {
-    final List<Map<String, String>> teste = [];
-    return await Future.delayed(
-        const Duration(seconds: 2), () => teste.toList());
-  }
-
+  const ContainerHome({Key? key, required this.repository}) : super(key: key);
+  final TarefasRepository repository;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, String>>>(
-      future: retornaOpces(),
+    return FutureBuilder<List<TarefasModel>>(
+      future: repository.getAllTarefas(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingWidget();

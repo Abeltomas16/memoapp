@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/home_page.dart';
 import 'package:memoapp/features/routas.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color(0xFFF5F5F5),
       ),
-      home: Rotas(),
+      home: Rotas(repository: TarefasRepository()),
     );
   }
 }
