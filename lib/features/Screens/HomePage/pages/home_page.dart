@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:memoapp/common/consts/const_app.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/widgets/opcoes_menu_widget.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final List<String> opcoes = [
-      "All",
-      "Trabalho",
-      "Musica",
-      "Travel",
-      "Escola",
-      "casa",
-    ];
     return Scaffold(
+        floatingActionButton: const FloatingActionButton(
+          onPressed: null,
+          backgroundColor: Colors.blue,
+          child: Icon(Icons.add),
+        ),
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           leading: const Padding(
@@ -48,7 +46,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 15),
               Flexible(
                 child: Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.centerRight,
@@ -64,10 +62,8 @@ class HomePage extends StatelessWidget {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    children: opcoes
-                        .map((e) => OpcoesMenu(
-                              tarefaNome: e.toString(),
-                            ))
+                    children: ConstApp.opcoes
+                        .map((e) => OpcoesMenu(tarefa: e))
                         .toList(),
                   ),
                 ),

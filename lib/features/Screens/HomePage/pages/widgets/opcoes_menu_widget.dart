@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OpcoesMenu extends StatelessWidget {
-  const OpcoesMenu({Key? key, required this.tarefaNome}) : super(key: key);
-  final String tarefaNome;
+  const OpcoesMenu({Key? key, required this.tarefa}) : super(key: key);
+  final Map<String, String> tarefa;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,16 +17,15 @@ class OpcoesMenu extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Flexible(
-            flex: 2,
-            child: Icon(
-              Icons.favorite,
-              size: 50,
-            ),
-          ),
+          Flexible(
+              flex: 1,
+              child: Image.asset(
+                tarefa.values.last,
+                height: 35,
+              )),
           const SizedBox(height: 15),
           Text(
-            tarefaNome,
+            tarefa.values.first,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
