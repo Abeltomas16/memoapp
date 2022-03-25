@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/home_page.dart';
+import 'package:memoapp/features/routas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color(0xFFF5F5F5),
       ),
-      home: HomePage(),
+      home: Rotas(),
     );
   }
 }
