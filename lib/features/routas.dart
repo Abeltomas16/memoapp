@@ -14,8 +14,8 @@ class Rotas extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
-          return PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
+          return MaterialPageRoute(
+            builder: (context) {
               return ContainerHome(
                 repository: repository,
                 ontap: (rota, args) {
@@ -23,18 +23,10 @@ class Rotas extends StatelessWidget {
                 },
               );
             },
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-            transitionDuration: const Duration(milliseconds: 2000),
           );
         }
         if (settings.name == '/list') {
-          return PageRouteBuilder(
+          /*return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return ContainerListar(
                 opcaomenu: settings.arguments as Map<String, String>,
@@ -53,6 +45,18 @@ class Rotas extends StatelessWidget {
               );
             },
             transitionDuration: const Duration(milliseconds: 2000),
+          );*/
+          return MaterialPageRoute(
+            builder: (context) {
+              return ContainerListar(
+                opcaomenu: settings.arguments as Map<String, String>,
+                repository: repository,
+                onBack: () => Navigator.of(context).pop(),
+                onCadastrar: (rota, args) {
+                  Navigator.of(context).pushNamed(rota, arguments: args);
+                },
+              );
+            },
           );
         }
         if (settings.name == '/cadastrar') {
@@ -69,7 +73,7 @@ class Rotas extends StatelessWidget {
                 child: child,
               );
             },
-            transitionDuration: const Duration(milliseconds: 700),
+            transitionDuration: const Duration(milliseconds: 500),
           );
         }
       },

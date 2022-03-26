@@ -27,9 +27,12 @@ class OpcoesMenu extends StatelessWidget {
           children: [
             Flexible(
                 flex: 1,
-                child: Image.asset(
-                  tarefa.values.last,
-                  height: 35,
+                child: Hero(
+                  tag: tarefa.values.first,
+                  child: Image.asset(
+                    tarefa.values.last,
+                    height: 35,
+                  ),
                 )),
             const SizedBox(height: 15),
             Text(

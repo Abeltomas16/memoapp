@@ -20,9 +20,12 @@ class ListItemTaskWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),
                   )),
-              child: Image.asset(
-                tarefa.values.last,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: tarefa.values.first,
+                child: Image.asset(
+                  tarefa.values.last,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 15),
