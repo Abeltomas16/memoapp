@@ -16,7 +16,12 @@ class ListarTarefas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(25, 118, 211, 1),
+        backgroundColor: Colors.blue,
+        floatingActionButton: const FloatingActionButton(
+          onPressed: null,
+          backgroundColor: Colors.blue,
+          child: Icon(Icons.add),
+        ),
         body: CustomScrollView(
           slivers: [
             ListAppbar(onBack: onBack),

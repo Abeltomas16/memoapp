@@ -6,7 +6,7 @@ class ListAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: const Color.fromRGBO(25, 118, 211, 1),
+      backgroundColor: Colors.blue,
       pinned: true,
       elevation: 0,
       leading: IconButton(
