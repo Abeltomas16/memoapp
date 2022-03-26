@@ -14,32 +14,62 @@ class Rotas extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
-          return MaterialPageRoute(
-            builder: (context) => ContainerHome(
-              repository: repository,
-              ontap: (rota, args) {
-                Navigator.of(context).pushNamed(rota, arguments: args);
-              },
-            ),
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ContainerHome(
+                repository: repository,
+                ontap: (rota, args) {
+                  Navigator.of(context).pushNamed(rota, arguments: args);
+                },
+              );
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 2000),
           );
         }
         if (settings.name == '/list') {
-          return MaterialPageRoute(
-            builder: (context) => ContainerListar(
-              opcaomenu: settings.arguments as Map<String, String>,
-              repository: repository,
-              onBack: () => Navigator.of(context).pop(),
-              onCadastrar: (rota, args) {
-                Navigator.of(context).pushNamed(rota, arguments: args);
-              },
-            ),
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ContainerListar(
+                opcaomenu: settings.arguments as Map<String, String>,
+                repository: repository,
+                onBack: () => Navigator.of(context).pop(),
+                onCadastrar: (rota, args) {
+                  Navigator.of(context).pushNamed(rota, arguments: args);
+                },
+              );
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 2000),
           );
         }
         if (settings.name == '/cadastrar') {
-          return MaterialPageRoute(
-            builder: (context) => CadatrarTarefa(
-              opcaomenu: settings.arguments as Map<String, String>,
-            ),
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return CadatrarTarefa(
+                opcaomenu: settings.arguments as Map<String, String>,
+              );
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 700),
           );
         }
       },
