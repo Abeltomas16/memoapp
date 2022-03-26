@@ -32,6 +32,8 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
   void initState() {
     super.initState();
     _dateTime = DateTime.now();
+    dataSelecionada =
+        DateFormat("dd-MM-yyy hh:mm:ss").format(_dateTime).toString();
   }
 
   @override
@@ -60,39 +62,109 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
               ))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextFormField(
-                maxLines: 4,
-                autofocus: true,
-                decoration: const InputDecoration(
-                  label: Text("oquê pretendes fazer?"),
-                  labelStyle: TextStyle(
-                      fontWeight: FontWeight.normal, color: Colors.black87),
-                ),
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 15),
-              Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
-                    Icons.notifications,
-                    color: Colors.blue,
+                  TextFormField(
+                    maxLines: 4,
+                    decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 2),
+                      ),
+                      label: Text(
+                        "Oquê pretendes fazer?",
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                          fontSize: 20,
+                        ),
+                      ),
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    style: const TextStyle(fontSize: 30),
                   ),
-                  const SizedBox(width: 10),
-                  TextButton(
-                    onPressed: () {
-                      selectedDate(context);
-                    },
-                    child: Text(dataSelecionada),
-                  )
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.notifications_outlined,
+                        color: Colors.blue,
+                      ),
+                      const SizedBox(width: 1),
+                      TextButton(
+                        onPressed: () async {
+                          final DateTime? data = await showDatePicker(
+                            initialDatePickerMode: DatePickerMode.day,
+                            firstDate: DateTime(2022),
+                            lastDate: DateTime(2030),
+                            context: context,
+                            initialDate: _dateTime,
+                          );
+                          if (data != null) {
+                            setState(() {
+                              dataSelecionada = DateFormat("dd-MM-yyy hh:mm:ss")
+                                  .format(data)
+                                  .toString();
+                            });
+                          }
+                        },
+                        child: Text(
+                          dataSelecionada,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.note,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              hintText: "Adicionar notas",
+                              hintStyle: TextStyle(color: Colors.black38),
+                              border: InputBorder.none),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(5),
+              color: Colors.blue,
+              width: double.infinity,
+              child: const TextButton(
+                child: Text(
+                  "Cadastrar",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                onPressed: null,
+              ),
+            )
+          ],
         ),
       ),
     );
