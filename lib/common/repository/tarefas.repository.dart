@@ -17,8 +17,7 @@ class TarefasRepository {
   Future insert(TarefasModel model) async {
     try {
       final database = await _getDatabase();
-      await database.insert(ConstsDatabase.TABLE_NAME, model.toMap(),
-          conflictAlgorithm: ConflictAlgorithm.replace);
+      await database.insert(ConstsDatabase.TABLE_NAME, model.toMap());
     } catch (e) {
       throw Exception("Erro ao inserir");
     }
@@ -47,11 +46,14 @@ class TarefasRepository {
 
   Future<List<TarefasModel>> search(String categoria) async {
     try {
+      List<Map<String, dynamic>> maps = [];
       final database = await _getDatabase();
-      final List<Map<String, dynamic>> maps = await database.query(
-          ConstsDatabase.TABLE_NAME,
-          where: "categoria LIKE ?",
-          whereArgs: ['%$categoria%']);
+      if (categoria.toLowerCase() == "all") {
+        maps = await database.query(ConstsDatabase.TABLE_NAME);
+      } else {
+        maps = await database.query(ConstsDatabase.TABLE_NAME,
+            where: "categoria LIKE ?", whereArgs: ['%$categoria%']);
+      }
 
       return List.generate(maps.length, (index) {
         return TarefasModel(

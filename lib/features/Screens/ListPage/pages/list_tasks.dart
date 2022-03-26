@@ -36,18 +36,35 @@ class _ListarTarefasState extends State<ListarTarefas> {
             ListAppbar(onBack: widget.onBack),
             ListItemTaskWidget(tarefa: widget.opcaomenu),
             SliverToBoxAdapter(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
-                      )),
+                child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: widget.tarefas.length,
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                        key: Key(
+                          widget.tarefas[index].id.toString(),
+                        ),
+                        child: CheckboxListTile(
+                            title: Text(
+                                widget.tarefas[index].descricao.toString()),
+                            value: widget.tarefas[index].terminado == 0
+                                ? false
+                                : true,
+                            onChanged: null));
+                  },
                 ),
               ),
-            )
+            ))
           ],
         ));
   }

@@ -64,6 +64,7 @@ class Rotas extends StatelessWidget {
             pageBuilder: (context, animation, secondaryAnimation) {
               return CadatrarTarefa(
                 opcaomenu: settings.arguments as Map<String, String>,
+                repository: repository,
               );
             },
             transitionsBuilder:

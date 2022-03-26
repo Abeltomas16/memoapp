@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
 
 class CadatrarTarefa extends StatefulWidget {
-  const CadatrarTarefa({Key? key, required this.opcaomenu}) : super(key: key);
+  const CadatrarTarefa({
+    Key? key,
+    required this.opcaomenu,
+    required this.repository,
+  }) : super(key: key);
   final Map<String, String> opcaomenu;
+  final TarefasRepository repository;
   @override
   _CadatrarTarefaState createState() => _CadatrarTarefaState();
 }
@@ -28,12 +35,14 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
     }
   }
 
+  late TextEditingController controller;
   @override
   void initState() {
     super.initState();
     _dateTime = DateTime.now();
     dataSelecionada =
         DateFormat("dd-MM-yyy hh:mm:ss").format(_dateTime).toString();
+    controller = TextEditingController();
   }
 
   @override
@@ -72,6 +81,7 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
+                    controller: controller,
                     maxLines: 4,
                     decoration: const InputDecoration(
                       focusedBorder: UnderlineInputBorder(
@@ -153,15 +163,26 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
               padding: const EdgeInsets.all(5),
               color: Colors.blue,
               width: double.infinity,
-              child: const TextButton(
-                child: Text(
+              child: TextButton(
+                child: const Text(
                   "Cadastrar",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                   ),
                 ),
-                onPressed: null,
+                onPressed: () {
+                  TarefasModel model = TarefasModel(
+                      id: 0,
+                      descricao: controller.text,
+                      categoria: widget.opcaomenu.values.first,
+                      dataInicar: dataSelecionada,
+                      terminado: 0,
+                      dataTerminado: dataSelecionada);
+                  widget.repository.insert(model).then((value) {
+                    Navigator.of(context).pop();
+                  });
+                },
               ),
             )
           ],
