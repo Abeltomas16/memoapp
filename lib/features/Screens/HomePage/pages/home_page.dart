@@ -3,7 +3,8 @@ import 'package:memoapp/common/consts/const_app.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/widgets/opcoes_menu_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.ontap}) : super(key: key);
+  final Function(String, Map<String, String>) ontap;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +64,10 @@ class HomePage extends StatelessWidget {
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     children: ConstApp.opcoes
-                        .map((e) => OpcoesMenu(tarefa: e))
+                        .map((e) => OpcoesMenu(
+                              tarefa: e,
+                              ontap: ontap,
+                            ))
                         .toList(),
                   ),
                 ),
