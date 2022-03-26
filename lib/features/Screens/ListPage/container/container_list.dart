@@ -11,10 +11,12 @@ class ContainerListar extends StatelessWidget {
     required this.opcaomenu,
     required this.repository,
     required this.onBack,
+    required this.onCadastrar,
   }) : super(key: key);
   final Map<String, String> opcaomenu;
   final TarefasRepository repository;
   final VoidCallback onBack;
+  final Function(String, Map<String, String>) onCadastrar;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<TarefasModel>>(
@@ -29,6 +31,7 @@ class ContainerListar extends StatelessWidget {
             tarefas: snapshot.data!,
             opcaomenu: opcaomenu,
             onBack: onBack,
+            onCadastrar: onCadastrar,
           );
         }
         if (snapshot.hasError) {

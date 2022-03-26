@@ -3,29 +3,38 @@ import 'package:memoapp/common/models/tarefas.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_app_bar.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_item_widget.dart';
 
-class ListarTarefas extends StatelessWidget {
+class ListarTarefas extends StatefulWidget {
   const ListarTarefas({
     Key? key,
     required this.tarefas,
     required this.opcaomenu,
     required this.onBack,
+    required this.onCadastrar,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
   final Map<String, String> opcaomenu;
   final VoidCallback onBack;
+  final Function(String, Map<String, String>) onCadastrar;
+  @override
+  State<ListarTarefas> createState() => _ListarTarefasState();
+}
+
+class _ListarTarefasState extends State<ListarTarefas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue,
-        floatingActionButton: const FloatingActionButton(
-          onPressed: null,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            widget.onCadastrar('/cadastrar', widget.opcaomenu);
+          },
           backgroundColor: Colors.blue,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
         body: CustomScrollView(
           slivers: [
-            ListAppbar(onBack: onBack),
-            ListItemTaskWidget(tarefa: opcaomenu),
+            ListAppbar(onBack: widget.onBack),
+            ListItemTaskWidget(tarefa: widget.opcaomenu),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height,
