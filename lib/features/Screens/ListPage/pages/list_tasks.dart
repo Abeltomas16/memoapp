@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_app_bar.dart';
+import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_item_widget.dart';
 
 class ListarTarefas extends StatelessWidget {
-  const ListarTarefas(
-      {Key? key, required this.tarefas, required this.opcaomenu})
-      : super(key: key);
+  const ListarTarefas({
+    Key? key,
+    required this.tarefas,
+    required this.opcaomenu,
+    required this.onBack,
+  }) : super(key: key);
   final List<TarefasModel> tarefas;
   final Map<String, String> opcaomenu;
+  final VoidCallback onBack;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Teste"),
-      ),
-      body: ListView.builder(
-        itemCount: tarefas.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(tarefas[index].descricao),
-          );
-        },
-      ),
-    );
+        backgroundColor: const Color.fromRGBO(25, 118, 211, 1),
+        body: CustomScrollView(
+          slivers: [
+            ListAppbar(onBack: onBack),
+            ListItemTaskWidget(tarefa: opcaomenu),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                      )),
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

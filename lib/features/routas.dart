@@ -26,6 +26,7 @@ class Rotas extends StatelessWidget {
               builder: (context) => ContainerListar(
                     opcaomenu: settings.arguments as Map<String, String>,
                     repository: repository,
+                    onBack: () => Navigator.of(context).pop(),
                   ));
         }
       },
