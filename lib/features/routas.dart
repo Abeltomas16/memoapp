@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/features/Screens/Cadastrar/pages/cadastrar_page.dart';
@@ -39,12 +41,16 @@ class Rotas extends StatelessWidget {
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
+              const begin = Offset(1, 0);
+              const end = Offset.zero;
+              final tween = Tween(begin: begin, end: end);
+              final offsetAnimation = animation.drive(tween);
+              return SlideTransition(
+                position: offsetAnimation,
                 child: child,
               );
             },
-            transitionDuration: const Duration(milliseconds: 2000),
+            transitionDuration: const Duration(milliseconds: 500),
           );*/
           return MaterialPageRoute(
             builder: (context) {
@@ -69,12 +75,16 @@ class Rotas extends StatelessWidget {
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              return ScaleTransition(
-                scale: animation,
+              const begin = Offset(1, 0);
+              const end = Offset.zero;
+              final tween = Tween(begin: begin, end: end);
+              final offsetAnimation = animation.drive(tween);
+              return SlideTransition(
+                position: offsetAnimation,
                 child: child,
               );
             },
-            transitionDuration: const Duration(milliseconds: 500),
+            // transitionDuration: const Duration(milliseconds: 500),
           );
         }
       },

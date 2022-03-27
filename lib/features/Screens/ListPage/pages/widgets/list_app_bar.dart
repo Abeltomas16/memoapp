@@ -19,7 +19,11 @@ class ListAppbar extends StatelessWidget {
       actions: const [
         IconButton(
           onPressed: null,
-          icon: Icon(Icons.control_point_rounded),
+          icon: Icon(
+            Icons.more_vert,
+            size: 30,
+            color: Colors.white,
+          ),
         ),
       ],
     );
