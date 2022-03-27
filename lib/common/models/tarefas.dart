@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:memoapp/common/models/categoria.dart';
-
 class TarefasModel {
   late int id;
   final String descricao;

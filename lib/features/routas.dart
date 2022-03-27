@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/features/Screens/Cadastrar/pages/cadastrar_page.dart';
