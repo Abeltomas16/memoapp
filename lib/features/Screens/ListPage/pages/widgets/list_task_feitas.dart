@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_item_widget.dart';
 
 class TaskFeitas extends StatelessWidget {
   const TaskFeitas({
@@ -41,25 +42,9 @@ class TaskFeitas extends StatelessWidget {
                 TarefasModel _tak = tarefas[index];
                 bool feita = _tak.terminado == 1;
                 return feita
-                    ? Dismissible(
-                        key: Key(
-                          _tak.id.toString(),
-                        ),
-                        child: CheckboxListTile(
-                          title: Text(
-                            _tak.descricao,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                                color: Colors.blue,
-                                decoration: TextDecoration.lineThrough),
-                          ),
-                          subtitle: Text(
-                            retornaData(_tak.dataInicar).toString(),
-                          ),
-                          value: true,
-                          onChanged: null,
-                        ),
+                    ? ListItemItemWidget(
+                        tak: _tak,
+                        stiloSubtitle: const TextStyle(color: Colors.red),
                       )
                     : Container();
               },

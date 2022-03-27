@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_item_widget.dart';
 
 class TaskAtrasadas extends StatelessWidget {
   const TaskAtrasadas({
@@ -39,25 +40,9 @@ class TaskAtrasadas extends StatelessWidget {
                 TarefasModel _tak = tarefas[index];
                 DateTime data = retornaData(_tak.dataInicar);
                 return data.isBefore(DateTime.now())
-                    ? Dismissible(
-                        key: Key(
-                          _tak.id.toString(),
-                        ),
-                        child: CheckboxListTile(
-                          title: Text(
-                            _tak.descricao,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-                          subtitle: Text(
-                            retornaData(_tak.dataInicar).toString(),
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                          value: _tak.terminado == 0 ? false : true,
-                          onChanged: null,
-                        ),
+                    ? ListItemItemWidget(
+                        tak: _tak,
+                        stiloSubtitle: const TextStyle(color: Colors.red),
                       )
                     : Container();
               },

@@ -1,59 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:memoapp/common/models/tarefas.dart';
 
-class ListItemTaskWidget extends StatelessWidget {
-  const ListItemTaskWidget({Key? key, required this.tarefa}) : super(key: key);
-  final Map<String, String> tarefa;
+class ListItemItemWidget extends StatelessWidget {
+  const ListItemItemWidget({
+    Key? key,
+    required this.tak,
+    required this.stiloSubtitle,
+  }) : super(key: key);
+  final TarefasModel tak;
+  final TextStyle stiloSubtitle;
+  DateTime retornaData(String data) {
+    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.all(40.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              height: 50,
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(100),
-                  )),
-              child: Hero(
-                tag: tarefa.values.first,
-                child: Image.asset(
-                  tarefa.values.last,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Text(
-                tarefa.values.first,
-                style: const TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 3),
-            const Padding(
-              padding: EdgeInsets.only(left: 5.0),
-              child: Text(
-                "150 tarefas",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+    return Dismissible(
+      key: Key(
+        tak.id.toString(),
+      ),
+      child: CheckboxListTile(
+        title: Text(
+          tak.descricao,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            color: Colors.black,
+          ),
         ),
+        subtitle: Text(
+          retornaData(tak.dataInicar).toString(),
+          style: stiloSubtitle,
+        ),
+        value: tak.terminado == 0 ? false : true,
+        onChanged: null,
       ),
     );
   }

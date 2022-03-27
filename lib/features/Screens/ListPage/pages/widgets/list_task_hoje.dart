@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memoapp/common/models/tarefas.dart';
 
+import 'list_task_item_widget.dart';
+
 class TaskHoje extends StatelessWidget {
   const TaskHoje({
     Key? key,
@@ -41,24 +43,9 @@ class TaskHoje extends StatelessWidget {
                 TarefasModel _tak = tarefas[index];
                 DateTime data = retornaData(_tak.dataInicar);
                 return data.isAfter(DateTime.now())
-                    ? Dismissible(
-                        key: Key(
-                          _tak.id.toString(),
-                        ),
-                        child: CheckboxListTile(
-                          title: Text(
-                            _tak.descricao,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-                          subtitle: Text(
-                            retornaData(_tak.dataInicar).toString(),
-                          ),
-                          value: _tak.terminado == 0 ? false : true,
-                          onChanged: null,
-                        ),
+                    ? ListItemItemWidget(
+                        tak: _tak,
+                        stiloSubtitle: const TextStyle(),
                       )
                     : Container();
               },

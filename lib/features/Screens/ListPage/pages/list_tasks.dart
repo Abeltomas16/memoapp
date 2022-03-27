@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memoapp/common/models/tarefas.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_app_bar.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_atrasadas.dart';
-import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_item_widget.dart';
+import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_header_widget.dart';
 
 import 'widgets/list_task_feitas.dart';
 import 'widgets/list_task_hoje.dart';
@@ -38,7 +38,7 @@ class _ListarTarefasState extends State<ListarTarefas> {
       body: CustomScrollView(
         slivers: [
           ListAppbar(onBack: widget.onBack),
-          ListItemTaskWidget(tarefa: widget.opcaomenu),
+          ListItemHeaderWidget(tarefa: widget.opcaomenu),
           SliverToBoxAdapter(
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
