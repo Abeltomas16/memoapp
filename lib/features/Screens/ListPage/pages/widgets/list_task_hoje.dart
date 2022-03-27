@@ -46,6 +46,7 @@ class TaskHoje extends StatelessWidget {
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(),
+                        onDelete: (ss) => null,
                       )
                     : Container();
               },

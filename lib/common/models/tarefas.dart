@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:memoapp/common/models/categoria.dart';
 
 class TarefasModel {
-  final int id;
+  late int id;
   final String descricao;
   final String categoria;
   final String dataInicar;

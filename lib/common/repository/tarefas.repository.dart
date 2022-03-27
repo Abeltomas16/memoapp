@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:memoapp/common/consts/const_database.dart';
 import 'package:memoapp/common/models/tarefas.dart';
 import 'package:path/path.dart';
@@ -51,8 +52,11 @@ class TarefasRepository {
       if (categoria.toLowerCase() == "all") {
         maps = await database.query(ConstsDatabase.TABLE_NAME);
       } else {
-        maps = await database.query(ConstsDatabase.TABLE_NAME,
-            where: "categoria LIKE ?", whereArgs: ['%$categoria%']);
+        maps = await database.query(
+          ConstsDatabase.TABLE_NAME,
+          where: "categoria LIKE ?",
+          whereArgs: ['%$categoria%'],
+        );
       }
 
       return List.generate(maps.length, (index) {
@@ -70,11 +74,27 @@ class TarefasRepository {
     }
   }
 
+  DateTime retornaData(String data) {
+    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+  }
+
   Future update(TarefasModel model) async {
     try {
+      TarefasModel modelo = TarefasModel(
+        id: model.id,
+        descricao: model.descricao,
+        categoria: model.categoria,
+        dataInicar: model.dataInicar,
+        terminado: 1,
+        dataTerminado: retornaData(model.dataTerminado).toString(),
+      );
       final database = await _getDatabase();
-      await database.update(ConstsDatabase.TABLE_NAME, model.toMap(),
-          where: "id = ?", whereArgs: [model.id]);
+      await database.update(
+        ConstsDatabase.TABLE_NAME,
+        modelo.toMap(),
+        where: "id = ?",
+        whereArgs: [model.id],
+      );
     } catch (e) {
       throw Exception("Erro ao Actualizar");
     }

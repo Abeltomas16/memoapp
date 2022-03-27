@@ -7,9 +7,11 @@ class ListItemItemWidget extends StatelessWidget {
     Key? key,
     required this.tak,
     required this.stiloSubtitle,
+    required this.onDelete,
   }) : super(key: key);
   final TarefasModel tak;
   final TextStyle stiloSubtitle;
+  final Function(TarefasModel) onDelete;
   DateTime retornaData(String data) {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
   }
@@ -36,6 +38,9 @@ class ListItemItemWidget extends StatelessWidget {
         value: tak.terminado == 0 ? false : true,
         onChanged: null,
       ),
+      onDismissed: (direction) {
+        onDelete(tak);
+      },
     );
   }
 }

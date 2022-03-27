@@ -7,8 +7,11 @@ class TaskAtrasadas extends StatelessWidget {
   const TaskAtrasadas({
     Key? key,
     required this.tarefas,
+    required this.onDelete,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
+  final Function(TarefasModel) onDelete;
+
   DateTime retornaData(String data) {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
   }
@@ -39,10 +42,11 @@ class TaskAtrasadas extends StatelessWidget {
               itemBuilder: (context, index) {
                 TarefasModel _tak = tarefas[index];
                 DateTime data = retornaData(_tak.dataInicar);
-                return data.isBefore(DateTime.now())
+                return (data.isBefore(DateTime.now()) && _tak.terminado == 0)
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(color: Colors.red),
+                        onDelete: onDelete,
                       )
                     : Container();
               },

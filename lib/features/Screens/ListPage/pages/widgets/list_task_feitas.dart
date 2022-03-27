@@ -45,6 +45,7 @@ class TaskFeitas extends StatelessWidget {
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(color: Colors.red),
+                        onDelete: (ss) => null,
                       )
                     : Container();
               },
