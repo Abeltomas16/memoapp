@@ -6,12 +6,15 @@ import 'package:memoapp/common/models/tarefas.dart';
 
 import 'list_task_item_widget.dart';
 
-class TaskHoje extends StatelessWidget {
-  const TaskHoje({
+class TaskPresentes extends StatelessWidget {
+  const TaskPresentes({
     Key? key,
+    required this.onDone,
     required this.tarefas,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
+  final Function(TarefasModel) onDone;
+
   DateTime retornaData(String data) {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
   }
@@ -42,11 +45,11 @@ class TaskHoje extends StatelessWidget {
               itemBuilder: (context, index) {
                 TarefasModel _tak = tarefas[index];
                 DateTime data = retornaData(_tak.dataInicar);
-                return data.isAfter(DateTime.now())
+                return (data.isAfter(DateTime.now()) && _tak.terminado == 0)
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(),
-                        onDone: (ss) => null,
+                        onDone: onDone,
                       )
                     : Container();
               },

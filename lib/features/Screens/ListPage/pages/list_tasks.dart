@@ -5,7 +5,7 @@ import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_atrasa
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_header_widget.dart';
 
 import 'widgets/list_task_feitas.dart';
-import 'widgets/list_task_hoje.dart';
+import 'widgets/list_task_presentes.dart';
 
 class ListarTarefas extends StatefulWidget {
   const ListarTarefas({
@@ -67,8 +67,9 @@ class _ListarTarefasState extends State<ListarTarefas> {
                       ),
                     ),
                     Expanded(
-                      child: TaskHoje(
+                      child: TaskPresentes(
                         tarefas: widget.tarefas,
+                        onDone: widget.onDone,
                       ),
                     ),
                     Expanded(
