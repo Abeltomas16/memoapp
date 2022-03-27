@@ -78,14 +78,14 @@ class TarefasRepository {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
   }
 
-  Future update(TarefasModel model) async {
+  Future update(TarefasModel model, int terminadoFor) async {
     try {
       TarefasModel modelo = TarefasModel(
         id: model.id,
         descricao: model.descricao,
         categoria: model.categoria,
         dataInicar: model.dataInicar,
-        terminado: 1,
+        terminado: terminadoFor,
         dataTerminado: retornaData(model.dataTerminado).toString(),
       );
       final database = await _getDatabase();

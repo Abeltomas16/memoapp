@@ -14,12 +14,14 @@ class ListarTarefas extends StatefulWidget {
     required this.opcaomenu,
     required this.onBack,
     required this.onCadastrar,
+    required this.onDone,
     required this.onDelete,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
   final Map<String, String> opcaomenu;
   final VoidCallback onBack;
   final Function(String, Map<String, String>) onCadastrar;
+  final Function(TarefasModel) onDone;
   final Function(TarefasModel) onDelete;
   @override
   State<ListarTarefas> createState() => _ListarTarefasState();
@@ -61,7 +63,7 @@ class _ListarTarefasState extends State<ListarTarefas> {
                     Expanded(
                       child: TaskAtrasadas(
                         tarefas: widget.tarefas,
-                        onDelete: widget.onDelete,
+                        onDone: widget.onDone,
                       ),
                     ),
                     Expanded(
@@ -72,6 +74,7 @@ class _ListarTarefasState extends State<ListarTarefas> {
                     Expanded(
                       child: TaskFeitas(
                         tarefas: widget.tarefas,
+                        onDelete: widget.onDelete,
                       ),
                     ),
                   ],

@@ -9,8 +9,10 @@ class TaskFeitas extends StatelessWidget {
   const TaskFeitas({
     Key? key,
     required this.tarefas,
+    required this.onDelete,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
+  final Function(TarefasModel) onDelete;
   DateTime retornaData(String data) {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
   }
@@ -45,7 +47,7 @@ class TaskFeitas extends StatelessWidget {
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(color: Colors.red),
-                        onDelete: (ss) => null,
+                        onDone: onDelete,
                       )
                     : Container();
               },

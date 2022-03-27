@@ -7,10 +7,10 @@ class TaskAtrasadas extends StatelessWidget {
   const TaskAtrasadas({
     Key? key,
     required this.tarefas,
-    required this.onDelete,
+    required this.onDone,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
-  final Function(TarefasModel) onDelete;
+  final Function(TarefasModel) onDone;
 
   DateTime retornaData(String data) {
     return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
@@ -46,7 +46,7 @@ class TaskAtrasadas extends StatelessWidget {
                     ? ListItemItemWidget(
                         tak: _tak,
                         stiloSubtitle: const TextStyle(color: Colors.red),
-                        onDelete: onDelete,
+                        onDone: onDone,
                       )
                     : Container();
               },

@@ -32,8 +32,11 @@ class ContainerListar extends StatelessWidget {
             opcaomenu: opcaomenu,
             onBack: onBack,
             onCadastrar: onCadastrar,
+            onDone: (task) {
+              repository.update(task, 1);
+            },
             onDelete: (task) {
-              repository.update(task);
+              repository.update(task, 2);
             },
           );
         }
