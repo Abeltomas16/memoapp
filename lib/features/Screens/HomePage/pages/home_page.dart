@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:memoapp/common/consts/const_app.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/widgets/opcoes_menu_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.ontap}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.ontap,
+    required this.repository,
+  }) : super(key: key);
   final Function(String, Map<String, String>) ontap;
+  final TarefasRepository repository;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +73,7 @@ class HomePage extends StatelessWidget {
                         .map((e) => OpcoesMenu(
                               tarefa: e,
                               ontap: ontap,
+                              repository: repository,
                             ))
                         .toList(),
                   ),

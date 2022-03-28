@@ -12,7 +12,7 @@ class TaskFeitas extends StatelessWidget {
   final List<TarefasModel> tarefas;
   final Function(TarefasModel) onDelete;
   DateTime retornaData(String data) {
-    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+    return DateFormat("dd-MM-yyy").parse(data);
   }
 
   @override

@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
+import 'package:memoapp/common/widgets/loading_widget.dart';
 
-class OpcoesMenu extends StatelessWidget {
-  const OpcoesMenu({Key? key, required this.tarefa, required this.ontap})
-      : super(key: key);
+class OpcoesMenu extends StatefulWidget {
+  const OpcoesMenu({
+    Key? key,
+    required this.tarefa,
+    required this.ontap,
+    required this.repository,
+  }) : super(key: key);
   final Map<String, String> tarefa;
   final Function(String, Map<String, String>) ontap;
+  final TarefasRepository repository;
+
+  @override
+  State<OpcoesMenu> createState() => _OpcoesMenuState();
+}
+
+class _OpcoesMenuState extends State<OpcoesMenu> {
+  int total = -1;
+  loadTipo(tipo) {
+    widget.repository.searchTotalItem(tipo).then((value) {
+      setState(() {
+        total = value;
+      });
+    }).toString();
+  }
+
   @override
   Widget build(BuildContext context) {
+    loadTipo(widget.tarefa.values.first);
     return GestureDetector(
       onTap: () {
-        ontap('/list', tarefa);
+        widget.ontap('/list', widget.tarefa);
       },
       child: Container(
         padding: const EdgeInsets.all(15.0),
@@ -26,15 +49,15 @@ class OpcoesMenu extends StatelessWidget {
             Flexible(
                 flex: 1,
                 child: Hero(
-                  tag: tarefa.values.first,
+                  tag: widget.tarefa.values.first,
                   child: Image.asset(
-                    tarefa.values.last,
+                    widget.tarefa.values.last,
                     height: 35,
                   ),
                 )),
             const SizedBox(height: 15),
             Text(
-              tarefa.values.first,
+              widget.tarefa.values.first,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -42,14 +65,18 @@ class OpcoesMenu extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 3),
-            const Text(
-              "150 tarefas",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.black45,
-              ),
-            ),
+            total != -1
+                ? Text(
+                    total.toString(),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                    ),
+                  )
+                : const Flexible(
+                    child: LoadingWidget(),
+                  ),
           ],
         ),
       ),

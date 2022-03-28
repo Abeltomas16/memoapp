@@ -1,6 +1,11 @@
-class Categoria {
-  final int id;
+class CategoriaModel {
+  final int? id;
   final String descricao;
+  final int totalTarefas;
 
-  Categoria({required this.id, required this.descricao});
+  CategoriaModel({
+    this.id,
+    required this.descricao,
+    required this.totalTarefas,
+  });
 }

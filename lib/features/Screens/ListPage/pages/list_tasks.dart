@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memoapp/common/models/tarefas.dart';
+import 'package:memoapp/common/repository/tarefas.repository.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_app_bar.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_atrasadas.dart';
 import 'package:memoapp/features/Screens/ListPage/pages/widgets/list_task_header_widget.dart';
@@ -16,6 +17,7 @@ class ListarTarefas extends StatefulWidget {
     required this.onCadastrar,
     required this.onDone,
     required this.onDelete,
+    required this.repository,
   }) : super(key: key);
   final List<TarefasModel> tarefas;
   final Map<String, String> opcaomenu;
@@ -23,6 +25,7 @@ class ListarTarefas extends StatefulWidget {
   final Function(String, Map<String, String>) onCadastrar;
   final Function(TarefasModel) onDone;
   final Function(TarefasModel) onDelete;
+  final TarefasRepository repository;
   @override
   State<ListarTarefas> createState() => _ListarTarefasState();
 }
@@ -42,7 +45,10 @@ class _ListarTarefasState extends State<ListarTarefas> {
       body: CustomScrollView(
         slivers: [
           ListAppbar(onBack: widget.onBack),
-          ListItemHeaderWidget(tarefa: widget.opcaomenu),
+          ListItemHeaderWidget(
+            tarefa: widget.opcaomenu,
+            repository: widget.repository,
+          ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: MediaQuery.of(context).size.height,

@@ -13,7 +13,7 @@ class ListItemItemWidget extends StatelessWidget {
   final TextStyle stiloSubtitle;
   final Function(TarefasModel) onDone;
   DateTime retornaData(String data) {
-    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+    return DateFormat("dd-MM-yyyy").parse(data);
   }
 
   @override

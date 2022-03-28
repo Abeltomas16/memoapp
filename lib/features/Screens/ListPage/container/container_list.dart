@@ -30,6 +30,7 @@ class ContainerListar extends StatelessWidget {
           return ListarTarefas(
             tarefas: snapshot.data!,
             opcaomenu: opcaomenu,
+            repository: repository,
             onBack: onBack,
             onCadastrar: onCadastrar,
             onDone: (task) {

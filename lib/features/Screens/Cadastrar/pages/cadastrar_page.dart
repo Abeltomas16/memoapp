@@ -29,8 +29,7 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
     );
     if (data != null) {
       setState(() {
-        dataSelecionada =
-            DateFormat("dd-MM-yyy hh:mm:ss").format(data).toString();
+        dataSelecionada = DateFormat("dd-MM-yyyy").format(data).toString();
       });
     }
   }
@@ -40,8 +39,7 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
   void initState() {
     super.initState();
     _dateTime = DateTime.now();
-    dataSelecionada =
-        DateFormat("dd-MM-yyy hh:mm:ss").format(_dateTime).toString();
+    dataSelecionada = DateFormat("dd-MM-yyyy").format(_dateTime).toString();
     controller = TextEditingController();
   }
 
@@ -122,7 +120,7 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
                           );
                           if (data != null) {
                             setState(() {
-                              dataSelecionada = DateFormat("dd-MM-yyy hh:mm:ss")
+                              dataSelecionada = DateFormat("dd-MM-yyyy")
                                   .format(data)
                                   .toString();
                             });
@@ -173,12 +171,13 @@ class _CadatrarTarefaState extends State<CadatrarTarefa> {
                 ),
                 onPressed: () {
                   TarefasModel model = TarefasModel(
-                      id: 0,
-                      descricao: controller.text,
-                      categoria: widget.opcaomenu.values.first,
-                      dataInicar: dataSelecionada,
-                      terminado: 0,
-                      dataTerminado: dataSelecionada);
+                    id: 0,
+                    descricao: controller.text,
+                    categoria: widget.opcaomenu.values.first,
+                    dataInicar: dataSelecionada,
+                    terminado: 0,
+                    dataTerminado: dataSelecionada,
+                  );
                   widget.repository.insert(model).then((value) {
                     Navigator.of(context).pop();
                   });

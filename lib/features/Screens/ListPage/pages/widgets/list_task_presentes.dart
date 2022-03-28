@@ -14,7 +14,7 @@ class TaskPresentes extends StatelessWidget {
   final Function(TarefasModel) onDone;
 
   DateTime retornaData(String data) {
-    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+    return DateFormat("dd-MM-yyyy").parse(data);
   }
 
   @override

@@ -15,6 +15,22 @@ class TarefasRepository {
     );
   }
 
+  int _total = 0;
+  int getTotal() => _total;
+
+  Future<int> searchTotalItem(String categoria) async {
+    try {
+      final database = await _getDatabase();
+      final List<Map> maps = await database.rawQuery(
+        'SELECT count(*) as total from tarefas where terminado=0 and categoria = ?',
+        [categoria],
+      );
+      return maps.first['total'] as int;
+    } catch (e) {
+      throw Exception("Erro ao inserir");
+    }
+  }
+
   Future insert(TarefasModel model) async {
     try {
       final database = await _getDatabase();
@@ -29,7 +45,7 @@ class TarefasRepository {
       final database = await _getDatabase();
       final List<Map<String, dynamic>> maps =
           await database.query(ConstsDatabase.TABLE_NAME);
-
+      _total = maps.length;
       return List.generate(maps.length, (index) {
         return TarefasModel(
           id: maps[index]['id'],
@@ -75,7 +91,7 @@ class TarefasRepository {
   }
 
   DateTime retornaData(String data) {
-    return DateFormat("dd-MM-yyy hh:mm:ss").parse(data);
+    return DateFormat("dd-MM-yyyy").parse(data);
   }
 
   Future update(TarefasModel model, int terminadoFor) async {

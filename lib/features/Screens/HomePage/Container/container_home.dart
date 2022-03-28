@@ -6,8 +6,11 @@ import 'package:memoapp/common/widgets/loading_widget.dart';
 import 'package:memoapp/features/Screens/HomePage/pages/home_page.dart';
 
 class ContainerHome extends StatelessWidget {
-  const ContainerHome({Key? key, required this.repository, required this.ontap})
-      : super(key: key);
+  const ContainerHome({
+    Key? key,
+    required this.repository,
+    required this.ontap,
+  }) : super(key: key);
   final TarefasRepository repository;
   final Function(String, Map<String, String>) ontap;
   @override
@@ -22,6 +25,7 @@ class ContainerHome extends StatelessWidget {
             snapshot.hasData) {
           return HomePage(
             ontap: ontap,
+            repository: repository,
           );
         }
         if (snapshot.hasError) {
